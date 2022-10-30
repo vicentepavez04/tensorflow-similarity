@@ -4,7 +4,7 @@ import os
 import tensorflow_similarity as tfsim
 
 def train(model, train_dataset, validation_dataset, epochs, distance = "cosine", callbacks_flag = True):
-    os.makedirs("./output")
+    os.makedirs("./output", exist_ok=True)
     path_log = "./output/train.csv"
     filepath="./output/weights-improvement-{epoch:02d}-{val_acc:.2f}.hdf5"
     checkpoint = tf.keras.callbacks.ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=False, mode='max')
