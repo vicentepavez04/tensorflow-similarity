@@ -3,6 +3,11 @@ import utils.load_dataset as load_dataset
 import utils.load_model as load_model
 import utils.trainer as trainer 
 import argparse
+import tensorflow as tf
+from tensorflow.python.client import device_lib
+sess = tf.compat.v1.Session(config=tf.compat.v1.ConfigProto(log_device_placement=True))
+print(device_lib.list_local_devices())
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
