@@ -12,6 +12,7 @@ def load():
     inputs=vgg_model.input
 
     model = tfsim.models.SimilarityModel(inputs, outputs)
+    model.summary()
     print("Model loaded correctly")
 
 
