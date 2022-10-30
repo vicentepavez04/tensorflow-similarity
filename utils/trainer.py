@@ -11,16 +11,20 @@ def train(model, train_dataset, validation_dataset, epochs, distance = "cosine",
     csv_logger = tf.keras.callbacks.CSVLogger(path_log, separator=',', append=True)
     #early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=3, verbose=1)
     callbacks_list = [checkpoint, csv_logger]
-
-
     distance = "cosine"  # @param ["cosine", "L2", "L1"]{allow-input: false} 
     loss = tfsim.losses.MultiSimilarityLoss(distance=distance)
+    LR = 0.0001
+    print("Compiling the model")
+    model.compile(optimizer=tf.keras.optimizers.Adam(LR), loss=loss)
 
+    print("training .............")
     if callbacks_flag:
         history = model.fit(train_dataset, epochs=epochs, validation_data=validation_dataset, callbacks = callbacks_list )
     else:
         history = model.fit(train_dataset, epochs=epochs, validation_data=validation_dataset)
 
+    print("Model trained succesfully")
+    
     print(history.history)
     plt.plot(history.history["loss"])
     plt.plot(history.history["val_loss"])
